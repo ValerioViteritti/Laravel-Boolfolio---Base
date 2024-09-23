@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Post;
+use App\Functions\Helper;
 
 
 class PostController extends Controller
@@ -24,16 +25,30 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        
+        return view('admin.posts.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        //
-    }
+{
+    $request->validate([
+        'title' => 'required|string|max:255',
+        'text' => 'required|string',
+        'reading_time' => 'required|numeric',
+    ]);
+
+    $data = $request->all();
+    $data['slug'] = Helper::generateSlug($data['title'], Post::class);
+
+    // Crea il nuovo post con i dati e lo slug generato
+    $new_post = Post::create($data);
+
+    return redirect()->route('admin.posts.index', $new_post->id)->with('success', 'Post creato con successo');
+}
+
 
     /**
      * Display the specified resource.
@@ -49,7 +64,7 @@ class PostController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        
     }
 
     /**
