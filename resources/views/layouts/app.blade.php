@@ -23,8 +23,10 @@
             @include('admin.partials.aside')
         @endauth
 
+        <div>
+            @yield('content')
+        </div>
 
-        @yield('content')
     </div>
 
 

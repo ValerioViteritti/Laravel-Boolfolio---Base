@@ -11,8 +11,8 @@ class DashboardController extends Controller
 {
     public function index(){
 
-        $count_post = Post::count();
+        $count_posts = Post::count();
         
-        return view('admin.index', compact('count_post'));
+        return view('admin.index', compact('count_posts'));
     }
 }
