@@ -18,7 +18,13 @@ class PostTableSeeder extends Seeder
         for ($i=0; $i < 100 ; $i++) { 
 
             $new_post = new Post();
-            
+            $new_post->title = $faker->sentence;
+            $new_post->slug = Helper::generateSlug($new_post->title, Post::class);
+            $new_post->text = $faker->paragraph;
+            $new_post->reading_time = $faker->numberBetween(1, 10);
+
+            $new_post->save();
+
 
 
             
