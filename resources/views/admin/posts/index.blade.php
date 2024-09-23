@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>elenco post</h1>
-    <table class="table">
+    <h1 class="ms-3">Elenco post</h1>
+    <table class="table ms-3">
         <thead>
             <tr>
                 <th scope="col">ID</th>
@@ -28,4 +28,6 @@
             @endforeach
         </tbody>
     </table>
+
+    {{ $posts->links() }}
 @endsection

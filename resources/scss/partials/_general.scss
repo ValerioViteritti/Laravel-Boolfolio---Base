@@ -1,4 +1,5 @@
 header {
+
     a {
         text-decoration: none;
         color: white;
@@ -39,4 +40,20 @@ aside {
 
 .card-body {
     width: 400px;
+}
+
+table {
+    tbody {
+        tr {
+            td {
+                &:hover {
+                    background-color: aquamarine;
+                }
+            }
+        }
+    }
+}
+
+a[aria-label] {
+    display: none;
 }
