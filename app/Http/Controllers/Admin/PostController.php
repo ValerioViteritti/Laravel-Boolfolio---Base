@@ -64,15 +64,28 @@ class PostController extends Controller
      */
     public function edit(string $id)
     {
-        
+        $post = Post::findOrFail($id);
+        return view('admin.posts.edit', compact('post'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Post $post)
     {
-        //
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'text' => 'required|string',
+            'reading_time' => 'required|numeric',
+        ]);
+
+        $data = $request->all();
+        $data['slug'] = Helper::generateSlug($data['title'], Post::class);
+
+        // Aggiorna il post con i nuovi dati
+        $post->update($data);
+
+        return redirect()->route('admin.posts.index')->with('success', 'Post aggiornato con successo');
     }
 
     /**
@@ -83,6 +96,6 @@ class PostController extends Controller
         $post = Post::find($id);
         $post->delete();
 
-        return redirect()->route('admin.posts.index')->with('Post {{$post->id}} eliminato con successo!');
+        return redirect()->route('admin.posts.index')->with('delete', 'Post' .' '.$post->id.' '. 'eliminato con successo!');
     }
 }

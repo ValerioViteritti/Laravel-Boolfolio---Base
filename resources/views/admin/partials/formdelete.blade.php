@@ -1,5 +1,4 @@
-<form class="d-inline" action="{{ route('admin.posts.destroy', $post) }}" method="POST"
-    onsubmit="return confirm('Sei sicuro di eliminare il fumetto: {{ $post->title }} ?')">
+<form class="d-inline" action="{{ $route }}" method="POST" onsubmit="return confirm('{{ $message }}')">
     @csrf
     @method('DELETE')
 

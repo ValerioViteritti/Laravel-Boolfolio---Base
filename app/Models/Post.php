@@ -9,5 +9,13 @@ class Post extends Model
 {
     use HasFactory;
 
+    // questo metodo che verrà visto come una proprietà ($miopost->category) mi restituisce la categoria in relazione
+    public function category(){
+        return $this->belongsTo(Category::class);
+    }
+
     protected $fillable = ['title', 'text', 'reading_time', 'slug'];
+    // protected $casts = [
+    //     'created_at' => 'datetime:d/m/Y'
+    // ];
 }
